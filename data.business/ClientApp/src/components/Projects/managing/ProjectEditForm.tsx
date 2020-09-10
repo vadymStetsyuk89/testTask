@@ -79,14 +79,19 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
       <Container>
         <Formik
           validationSchema={Yup.object().shape({
-            name: Yup.string().required(() => 'Name is required'),
-            customerName: Yup.string().required(
-              () => 'Customer name is required'
-            ),
-            rate: Yup.number(),
+            name: Yup.string()
+              .required(() => 'Name is required')
+              .min(3)
+              .max(50),
+            customerName: Yup.string()
+              .required(() => 'Customer name is required')
+              .min(3)
+              .max(50),
+            rate: Yup.number().min(0.01),
           })}
           initialValues={initDefaultValues(projectForEdit)}
           onSubmit={(values: any) => {
+            debugger;
             onEdit(values, projectForEdit);
           }}
           innerRef={(formik: any) => {}}

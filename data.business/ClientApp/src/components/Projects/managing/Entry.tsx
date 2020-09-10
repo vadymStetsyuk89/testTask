@@ -30,10 +30,16 @@ export const Entry: React.FC<IEntryProps> = (props: IEntryProps) => {
               props.formik.touched[props.fieldName]
             }
             onChange={(args: any) => {
-              let isValid: boolean = true;
               const value = args?.target?.value ? args.target.value : '';
 
-              if (isValid) {
+              if (props.isNumber) {
+                let parsedValue = parseFloat(value);
+
+                if (isNaN(parsedValue)) parsedValue = 0;
+
+                props.formik.setFieldValue(props.fieldName, parsedValue);
+                props.formik.setFieldTouched(props.fieldName);
+              } else {
                 props.formik.setFieldValue(props.fieldName, value);
                 props.formik.setFieldTouched(props.fieldName);
               }
