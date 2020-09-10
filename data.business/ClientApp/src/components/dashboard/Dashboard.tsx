@@ -5,6 +5,7 @@ import Footer from './Footer';
 import Header from './Header';
 import MainContent from './MainContent';
 import { SharedDialog } from './SharedDialog';
+import './dashboard.scss';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +24,7 @@ export const Dashboard = (props: any) => {
 
   return (
     <>
-      <div>
+      <div className="dashboard">
         <Header />
 
         <MainContent />

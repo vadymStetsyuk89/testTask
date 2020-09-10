@@ -17,8 +17,8 @@ const project = createSlice({
 
   reducers: {
     apiGetAllProjects(state) {},
-    apiAddNewProject(state, action) {},
-    apiUpdateProject(state, action) {},
+    apiAddNewProject(state, action: { type: string; payload: Prdoject }) {},
+    apiUpdateProject(state, action: { type: string; payload: Prdoject }) {},
     apiDeleteProjectById(state, action: { type: string; payload: number }) {},
     setProjectList(state, action: { type: string; payload: Prdoject[] }) {
       state.projects = action.payload;

@@ -1,4 +1,4 @@
-import { postWebRequest } from './../helpers/epic.helper';
+import { postWebRequest, putWebRequest } from './../helpers/epic.helper';
 import { Observable } from 'rxjs';
 import 'rxjs-compat/add/observable/empty';
 import { projectActions } from '../reducers/projectSlice';
@@ -86,7 +86,7 @@ export const apiUpdateProjectEpic = (action$: AnyAction, state$: any) => {
   return action$.pipe(
     ofType(projectActions.apiUpdateProject.type),
     switchMap((action: AnyAction) => {
-      return postWebRequest(
+      return putWebRequest(
         API.UPDATE_PROJECT,
         action.payload,
         state$.value
@@ -95,7 +95,6 @@ export const apiUpdateProjectEpic = (action$: AnyAction, state$: any) => {
           return successCommonEpicFlow(successResponse, [], action);
         }),
         catchError((errorResponse: any) => {
-          debugger;
           let pseudoResult = new List<Prdoject>(state$.value.project.projects)
             .select((project) => {
               if (project.id === action.payload.id) return action.payload;
@@ -106,6 +105,38 @@ export const apiUpdateProjectEpic = (action$: AnyAction, state$: any) => {
           return errorCommonEpicFlow(
             pseudoResult,
             [{ type: 'ERROR_UPDATE_PROJECT' }],
+            action
+          );
+        })
+      );
+    })
+  );
+};
+
+export const apiAddNewProjectEpic = (action$: AnyAction, state$: any) => {
+  return action$.pipe(
+    ofType(projectActions.apiAddNewProject.type),
+    switchMap((action: AnyAction) => {
+      debugger;
+      return postWebRequest(
+        API.ADD_NEW_PROJECT,
+        action.payload,
+        state$.value
+      ).pipe(
+        mergeMap((successResponse: any) => {
+          return successCommonEpicFlow(successResponse, [], action);
+        }),
+        catchError((errorResponse: any) => {
+          let pseudoResult = new List<Prdoject>(
+            state$.value.project.projects.map((item) => ({
+              ...item,
+            }))
+          );
+          pseudoResult.push(action.payload);
+
+          return errorCommonEpicFlow(
+            pseudoResult.toArray(),
+            [{ type: 'ERROR_CREATE_PROJECT' }],
             action
           );
         })

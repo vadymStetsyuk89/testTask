@@ -19,9 +19,16 @@ export class WorkingTime extends EntityBaseNamed {
     super();
   }
 
-  startedAt: Date;
-  endedAt: Date;
+  startedAt: string;
+  endedAt: string;
 
   project: Prdoject;
   projectId: number;
+}
+
+export interface IProjectFormValues {
+  name: string;
+  customerName: string;
+  rate: number;
+  workingTiming: any[];
 }

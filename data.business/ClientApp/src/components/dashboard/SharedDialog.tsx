@@ -23,7 +23,12 @@ export const SharedDialog: React.FC<ISharedDialogProps> = (
 
   return (
     <>
-      <Dialog aria-labelledby="simple-dialog-title" open={isOpen}>
+      <Dialog
+        fullWidth
+        maxWidth={`lg`}
+        aria-labelledby="simple-dialog-title"
+        open={isOpen}
+      >
         <DialogTitle id="simple-dialog-title">{dialogProps.title}</DialogTitle>
         {isOpen && dialogProps?.component ? (
           <div>

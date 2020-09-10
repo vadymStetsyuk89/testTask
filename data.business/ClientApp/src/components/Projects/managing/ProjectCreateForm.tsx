@@ -9,52 +9,51 @@ import { Container, Button } from '@material-ui/core';
 import { dialogActions } from '../../../reducers/dialogSlice';
 import { assignPendingActions } from '../../../helpers/action.helper';
 import { projectActions } from '../../../reducers/projectSlice';
+import { IProjectEditFormState } from './ProjectEditForm';
 
-export interface IProjectEditFormState {}
+export interface IProjectCreateFormState {}
 
-const buildPayload = (values: IProjectFormValues, sourceEntity: Prdoject) => {
+const buildPayload = (values: IProjectFormValues) => {
   let payload: Prdoject = {
-    ...sourceEntity,
     name: values.name,
     customerName: values.customerName,
     rate: values.rate,
     timings: [],
+    description: '',
+    id: 0,
   };
 
   return payload;
 };
 
-const initDefaultValues = (sourceEntity: Prdoject) => {
+const initDefaultValues = () => {
   const initValues: IProjectFormValues = {
-    name: sourceEntity.name,
-    customerName: sourceEntity.customerName,
-    rate: sourceEntity.rate,
+    name: '',
+    customerName: '',
+    rate: 0,
     workingTiming: [],
   };
 
   return initValues;
 };
 
-const ProjectEditForm: React.FC<IProjectEditFormState> = (
-  props: IProjectEditFormState
+const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
+  props: IProjectCreateFormState
 ) => {
   const dispatch = useDispatch();
-
-  const projectForEdit: Prdoject = useSelector<IApplicationState, Prdoject>(
-    (state) => state.project.targetProject
-  );
 
   const onDismis = () => {
     dispatch(dialogActions.closeDialog());
     dispatch(projectActions.changeTargetProject(null));
   };
 
-  const onEdit = (values: IProjectFormValues, project: Prdoject) => {
-    const payload = buildPayload(values, project);
+  const onCreate = (values: IProjectFormValues) => {
+    const payload = buildPayload(values);
 
+    debugger;
     dispatch(
       assignPendingActions(
-        projectActions.apiUpdateProject(payload),
+        projectActions.apiAddNewProject(payload),
         [],
         [],
         (args: any) => {
@@ -83,11 +82,11 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
               .min(3)
               .max(50),
             rate: Yup.number().min(0.01),
+            workingTiming: Yup.array(),
           })}
-          initialValues={initDefaultValues(projectForEdit)}
+          initialValues={initDefaultValues()}
           onSubmit={(values: any) => {
-            debugger;
-            onEdit(values, projectForEdit);
+            onCreate(values);
           }}
           innerRef={(formik: any) => {}}
           validateOnBlur={false}
@@ -117,4 +116,4 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
   );
 };
 
-export default ProjectEditForm;
+export default ProjectCreateForm;

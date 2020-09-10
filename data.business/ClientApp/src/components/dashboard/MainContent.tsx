@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './header.scss';
+import './mainContent.scss';
 import { Switch, Route, Redirect } from 'react-router';
 import { APP_SEGMENT, PROJECTS_SEGMENT } from '../AppRouting';
 import Projects from '../Projects/Projects';

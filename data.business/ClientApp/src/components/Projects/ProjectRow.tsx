@@ -47,9 +47,8 @@ const ProjectRow: React.FC<IProjectRowState> = (props: IProjectRowState) => {
     dispatch(projectActions.changeTargetProject(props.project));
     dispatch(
       dialogActions.openDialog({
-        title: 'Edit',
+        title: `Edit ${props.project.name}`,
         component: ProjectEditForm,
-        description: 'Editing project',
       })
     );
   };
