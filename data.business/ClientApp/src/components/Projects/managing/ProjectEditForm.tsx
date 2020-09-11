@@ -23,6 +23,8 @@ const buildPayload = (values: IProjectFormValues, sourceEntity: Prdoject) => {
     workingTimes: [...values.workingTiming],
   };
 
+  debugger;
+
   return payload;
 };
 
@@ -67,17 +69,18 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
         [],
         (args: any) => {
           /// TODO
-          let updatedProjects = new List<Prdoject>(prdojects)
-            .select((project) => {
-              let selectResult = project;
-
-              if (project.id === args.id) selectResult = args;
-
-              return selectResult;
-            })
-            .toArray();
-
-          dispatch(projectActions.setProjectList(updatedProjects));
+          dispatch(
+            assignPendingActions(
+              projectActions.apiGetAllProjects(),
+              [],
+              [],
+              (args: any) => {
+                /// TODO
+                dispatch(projectActions.setProjectList(args));
+              },
+              (args: any) => {}
+            )
+          );
           onDismis();
         },
         (args: any) => {

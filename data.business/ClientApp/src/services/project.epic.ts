@@ -14,26 +14,29 @@ import { Prdoject, WorkingTime } from '../model/project/prdoject';
 import { projectActions } from '../reducers/projectSlice';
 import { postWebRequest, putWebRequest } from './../helpers/epic.helper';
 
-export const apiGetAllFabricsEpic = (action$: AnyAction, state$: any) => {
+export const apiGetAllProjectsEpic = (action$: AnyAction, state$: any) => {
   return action$.pipe(
     ofType(projectActions.apiGetAllProjects.type),
     switchMap((action: AnyAction) => {
       return getWebRequest(API.GET_ALL_PROJECTS, state$.value).pipe(
         mergeMap((successResponse: any) => {
+          successResponse.forEach((project: Prdoject) => {
+            if (project.workingTimes) {
+              project.workingTimes.forEach((workingTime: WorkingTime) => {
+                if (!workingTime.startedAt.getTime) {
+                  workingTime.startedAt = new Date(workingTime.startedAt);
+                }
+
+                if (!workingTime.endedAt.getTime) {
+                  workingTime.endedAt = new Date(workingTime.endedAt);
+                }
+              });
+            }
+          });
+
           return successCommonEpicFlow(successResponse, [], action);
         }),
         catchError((errorResponse: any) => {
-          // let projectstubP: Prdoject[] = [];
-
-          // for (let i = 1; i < 10; i++) {
-          //   let projectNew = new Prdoject();
-          //   projectNew.name = `Name ${i}`;
-          //   projectNew.customerName = `Customer Name ${i}`;
-          //   projectNew.rate = i + 10;
-          //   projectNew.id = i;
-
-          //   projectstubP.push(projectNew);
-          // }
           return errorCommonEpicFlow(
             errorResponse,
             [{ type: 'ERROR_GET_ALL_PROJECTS' }],
