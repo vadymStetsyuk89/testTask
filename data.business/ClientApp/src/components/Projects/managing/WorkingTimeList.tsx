@@ -30,10 +30,6 @@ const WorkingTimeList: React.FC<IWorkingTimeListState> = (
 ) => {
   const classes = useStyles();
 
-  let ddd = [];
-
-  ddd.length;
-
   return (
     <div className="workingTimeList">
       <TableContainer component={Paper}>
