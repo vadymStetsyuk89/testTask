@@ -21,11 +21,13 @@ export const SharedDialog: React.FC<ISharedDialogProps> = (
     (state) => state.dialog.isOpen
   );
 
+  const maxWidth: any = dialogProps ? dialogProps.maxWidth : 'md';
+
   return (
     <>
       <Dialog
         fullWidth
-        maxWidth={`lg`}
+        maxWidth={maxWidth}
         aria-labelledby="simple-dialog-title"
         open={isOpen}
       >

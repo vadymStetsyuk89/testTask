@@ -4,10 +4,9 @@ import { Prdoject } from '../model/project/prdoject';
 const defaultDialogProps = () => {
   return {
     title: '',
-    closeFunctions: null,
     component: null,
     description: '',
-    commandBarItems: [],
+    maxWidth: 'md',
   };
 };
 
@@ -25,6 +24,7 @@ export interface IDialogProps {
   title: string;
   component: any;
   description?: string;
+  maxWidth: string;
 }
 
 const dialog = createSlice({
@@ -38,6 +38,7 @@ const dialog = createSlice({
         title: action.payload.title,
         description: action.payload.description,
         component: action.payload.component,
+        maxWidth: action.payload.maxWidth,
       };
 
       state.isOpen = true;

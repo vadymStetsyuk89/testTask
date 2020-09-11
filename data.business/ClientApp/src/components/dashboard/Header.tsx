@@ -16,17 +16,31 @@ import { useDispatch } from 'react-redux';
 import { projectActions } from '../../reducers/projectSlice';
 import ProjectCreateForm from '../Projects/managing/ProjectCreateForm';
 import { dialogActions } from '../../reducers/dialogSlice';
+import InfoIcon from '@material-ui/icons/Info';
+import TotalInfo from '../Projects/totalInfo/TotalInfo';
 
 const Header = () => {
   const dispatch = useDispatch();
 
-  const onNewProject = () => {
+  const onNewProjectClick = () => {
     dispatch(projectActions.changeTargetProject(null));
     dispatch(
       dialogActions.openDialog({
         title: 'Create new project',
         component: ProjectCreateForm,
         description: 'Editing project',
+        maxWidth: 'lg',
+      })
+    );
+  };
+
+  const onTotalInfoClick = () => {
+    dispatch(
+      dialogActions.openDialog({
+        title: 'Total info',
+        component: TotalInfo,
+        description: 'Total info',
+        maxWidth: 'sm',
       })
     );
   };
@@ -39,12 +53,22 @@ const Header = () => {
         </Typography>
 
         <IconButton
-          onClick={onNewProject}
+          onClick={onNewProjectClick}
           color="inherit"
-          aria-label="add to shopping cart"
+          aria-label="new project"
         >
           <Tooltip title="Add new project" aria-label="add">
             <AddCircleOutlineIcon />
+          </Tooltip>
+        </IconButton>
+
+        <IconButton
+          onClick={onTotalInfoClick}
+          color="inherit"
+          aria-label="total info"
+        >
+          <Tooltip title="Total info" aria-label="info">
+            <InfoIcon />
           </Tooltip>
         </IconButton>
       </Toolbar>

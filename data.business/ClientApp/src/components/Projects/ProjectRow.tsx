@@ -22,7 +22,7 @@ import { dialogActions } from '../../reducers/dialogSlice';
 import ProjectEditForm from './managing/ProjectEditForm';
 import { List } from 'linq-typescript';
 import {
-  buildTotalTimeString,
+  buildProjectTotalTimeString,
   buildProfitString,
 } from '../../helpers/timeParsing.helper';
 
@@ -55,6 +55,7 @@ const ProjectRow: React.FC<IProjectRowState> = (props: IProjectRowState) => {
       dialogActions.openDialog({
         title: `Edit ${props.project.name}`,
         component: ProjectEditForm,
+        maxWidth: 'lg',
       })
     );
   };
@@ -66,7 +67,9 @@ const ProjectRow: React.FC<IProjectRowState> = (props: IProjectRowState) => {
       </TableCell>
       <TableCell align="left">{props.project.customerName}</TableCell>
       <TableCell align="left">{props.project.rate}</TableCell>
-      <TableCell align="left">{buildTotalTimeString(props.project)}</TableCell>
+      <TableCell align="left">
+        {buildProjectTotalTimeString(props.project)}
+      </TableCell>
       <TableCell align="left">{buildProfitString(props.project)}</TableCell>
       <TableCell align="left">
         <ButtonGroup
