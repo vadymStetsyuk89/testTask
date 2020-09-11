@@ -41,6 +41,15 @@ namespace data.business
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    t => t.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
             services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
 
             services.AddControllers();
@@ -73,6 +82,8 @@ namespace data.business
             // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 
