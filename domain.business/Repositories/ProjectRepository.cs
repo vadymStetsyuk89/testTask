@@ -26,6 +26,7 @@ SELECT SCOPE_IDENTITY()";
 
         string updateQuery =
 @"UPDATE [Projects] SET 
+[IsDeleted]=@IsDeleted,
 [LastModified]=GETUTCDATE(),
 [Name]=@Name,
 [Description]=@Description,

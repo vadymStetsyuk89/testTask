@@ -36,8 +36,6 @@ namespace data.business
 
             ConfigurationManager.SetAppSettingsProperties(Configuration);
 
-            ConfigurationManager.SetContentRootDirectoryPath(env.ContentRootPath);
-
             _environment = env;
         }
 
@@ -78,12 +76,12 @@ namespace data.business
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller}/{action=Index}/{id?}");
+            //});
 
             app.UseSpa(spa => {
                 spa.Options.SourcePath = "ClientApp";

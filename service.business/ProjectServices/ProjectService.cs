@@ -1,5 +1,6 @@
 ﻿using domain.business.DbConnectionFactory;
 using domain.business.Entities.Projects;
+using domain.business.Entities.WorkingTimes;
 using domain.business.Repositories.Contracts;
 using service.business.ProjectServices.Contracts;
 using System.Collections.Generic;
@@ -28,9 +29,9 @@ namespace service.business.ProjectServices
 
                     project.Id = projRepository.CreateProject(project);
 
-                    foreach (var time in project.WorkingTimes)
+                    foreach (WorkingTime time in project.WorkingTimes)
                     {
-                        //TODO: 
+                        timeRepository.CreateTime(time);
                     }
 
                     return projRepository.GetProject(project.Id);
@@ -70,12 +71,9 @@ namespace service.business.ProjectServices
             {
                 using (var connection = _connectionFactory.NewSqlConnection())
                 {
-                    IProjectRepository projRepository = _repositoriesFactory.GetProjectRepository(connection);
-                    IWorkingTimeRepository timeRepository = _repositoriesFactory.GetWorkingTimeRepository(connection);
-
-                    IEnumerable<Project> results = projRepository.GetAllProjects();
-
-                    return results;
+                    return _repositoriesFactory
+                        .GetProjectRepository(connection)
+                        .GetAllProjects();
                 }
             });
 
@@ -84,11 +82,22 @@ namespace service.business.ProjectServices
             {
                 using (var connection = _connectionFactory.NewSqlConnection())
                 {
-                    project.IsDeleted = true;
+                    IProjectRepository projRepository = _repositoriesFactory.GetProjectRepository(connection);
+                    IWorkingTimeRepository timeRepository = _repositoriesFactory.GetWorkingTimeRepository(connection);
 
-                    _repositoriesFactory
-                        .GetProjectRepository(connection)
-                        .UpdateProject(project);
+                    projRepository.UpdateProject(project);
+
+                    foreach (var time in project.WorkingTimes)
+                    {
+                        if (time.IsNew())
+                        {
+                            timeRepository.CreateTime(time);
+                        }
+                        else
+                        {
+                            timeRepository.UpdateTime(time);
+                        }
+                    }
 
                     return project;
                 }
