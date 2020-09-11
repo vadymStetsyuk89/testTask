@@ -31,6 +31,7 @@ namespace service.business.ProjectServices
 
                     foreach (WorkingTime time in project.WorkingTimes)
                     {
+                        time.ProjectId = project.Id;
                         timeRepository.CreateTime(time);
                     }
 
@@ -93,6 +94,7 @@ namespace service.business.ProjectServices
                     {
                         if (time.IsNew())
                         {
+                            time.ProjectId = project.Id;
                             timeRepository.CreateTime(time);
                         }
                         else
