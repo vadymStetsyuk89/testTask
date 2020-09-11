@@ -25,7 +25,6 @@ export const Entry: React.FC<IEntryProps> = (props: IEntryProps) => {
             type={props.isNumber ? 'number' : undefined}
             autoComplete={'off'}
             value={`${props.formik.values[props.fieldName]}`}
-            className="form__group__field"
             required={props.isRequired}
             label={props.label}
             error={
