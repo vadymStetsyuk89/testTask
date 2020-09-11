@@ -2,10 +2,12 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Prdoject } from '../../../model/project/prdoject';
+import { Prdoject, WorkingTime } from '../../../model/project/prdoject';
 import { IApplicationState } from '../../../reducers/rootReducer';
 import { TextField, Grid, Button } from '@material-ui/core';
 import Entry from './Entry';
+import { dateToFormatedString } from '../../../helpers/date.helper';
+import * as moment from 'moment';
 
 export interface IWorkingTimeEntryState {
   formik: any;
@@ -19,6 +21,10 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
   const [to, setTo] = React.useState<Date>();
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
+  React.useEffect(() => {
+    onInput();
+  }, [name, from, to]);
+
   const onInput = () => {
     if (name && name.length > 0 && from && to && to > from) {
       setIsDisabled(false);
@@ -27,9 +33,28 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
     }
   };
 
-  React.useEffect(() => {
-    onInput();
-  }, [name, from, to]);
+  const clearEntry = () => {
+    setName('');
+  };
+
+  const onAddClick = () => {
+    let timingValues: any[] = [...props.formik.values.workingTiming];
+    timingValues.push(buildWorkingTime());
+
+    props.formik.setFieldValue('workingTiming', timingValues);
+    props.formik.setFieldTouched('workingTiming');
+
+    clearEntry();
+  };
+
+  const buildWorkingTime = () => {
+    let newWorkingTime = new WorkingTime();
+    newWorkingTime.name = name;
+    newWorkingTime.startedAt = from;
+    newWorkingTime.endedAt = to;
+
+    return newWorkingTime;
+  };
 
   return (
     <div>
@@ -41,12 +66,12 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
               const value = args?.target?.value ? args.target.value : '';
               setName(value);
             }}
-            label="Standard"
+            label="Comment"
           />
         </Grid>
         <Grid>
           <TextField
-            label="Next appointment"
+            label="Started at"
             type="datetime-local"
             onChange={(args: any) => {
               const value = args?.target?.value ? args.target.value : '';
@@ -60,7 +85,7 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
         </Grid>
         <Grid>
           <TextField
-            label="Next appointment"
+            label="Ended at"
             type="datetime-local"
             InputLabelProps={{
               shrink: true,
@@ -79,15 +104,10 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
             variant="contained"
             color="primary"
             onClick={() => {
-              debugger;
-              let huj: any[] = [...props.formik.values.workingTiming];
-              huj.push('132');
-
-              props.formik.setFieldValue('workingTiming', huj);
-              props.formik.setFieldTouched('workingTiming');
+              onAddClick();
             }}
           >
-            Add
+            Add time
           </Button>
         </Grid>
       </Grid>

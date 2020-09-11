@@ -19,8 +19,8 @@ export class WorkingTime extends EntityBaseNamed {
     super();
   }
 
-  startedAt: string;
-  endedAt: string;
+  startedAt: Date;
+  endedAt: Date;
 
   project: Prdoject;
   projectId: number;

@@ -86,7 +86,6 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
           })}
           initialValues={initDefaultValues(projectForEdit)}
           onSubmit={(values: any) => {
-            debugger;
             onEdit(values, projectForEdit);
           }}
           innerRef={(formik: any) => {}}

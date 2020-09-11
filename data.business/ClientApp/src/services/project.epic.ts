@@ -66,7 +66,6 @@ export const apiDeleteProjectByIdEpic = (action$: AnyAction, state$: any) => {
           return successCommonEpicFlow(successResponse, [], action);
         }),
         catchError((errorResponse: any) => {
-          debugger;
           let pseudoResult = new List<Prdoject>(state$.value.project.projects)
             .where((project) => project.id !== action.payload)
             .toArray();
@@ -117,7 +116,6 @@ export const apiAddNewProjectEpic = (action$: AnyAction, state$: any) => {
   return action$.pipe(
     ofType(projectActions.apiAddNewProject.type),
     switchMap((action: AnyAction) => {
-      debugger;
       return postWebRequest(
         API.ADD_NEW_PROJECT,
         action.payload,

@@ -18,7 +18,7 @@ const buildPayload = (values: IProjectFormValues) => {
     name: values.name,
     customerName: values.customerName,
     rate: values.rate,
-    timings: [],
+    timings: values.workingTiming,
     description: '',
     id: 0,
   };
@@ -50,7 +50,6 @@ const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
   const onCreate = (values: IProjectFormValues) => {
     const payload = buildPayload(values);
 
-    debugger;
     dispatch(
       assignPendingActions(
         projectActions.apiAddNewProject(payload),

@@ -16,9 +16,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { assignPendingActions } from '../../helpers/action.helper';
 import { projectActions } from '../../reducers/projectSlice';
 import { IApplicationState } from '../../reducers/rootReducer';
-import { Prdoject } from '../../model/project/prdoject';
+import { Prdoject, WorkingTime } from '../../model/project/prdoject';
 import { dialogActions } from '../../reducers/dialogSlice';
 import ProjectEditForm from './managing/ProjectEditForm';
+import { List } from 'linq-typescript';
+import { calculateTotalTime } from '../../helpers/timeParsing.helper';
 
 export interface IProjectRowState {
   project: Prdoject;
@@ -60,7 +62,7 @@ const ProjectRow: React.FC<IProjectRowState> = (props: IProjectRowState) => {
       </TableCell>
       <TableCell align="left">{props.project.customerName}</TableCell>
       <TableCell align="left">{props.project.rate}</TableCell>
-      <TableCell align="left">{'TODO: Total time'}</TableCell>
+      <TableCell align="left">{calculateTotalTime(props.project)}</TableCell>
       <TableCell align="left">{'TODO: Total profit'}</TableCell>
       <TableCell align="left">
         <Button onClick={onEdit} variant="contained" color="primary">

@@ -63,7 +63,7 @@
     "immutable": "^4.0.0-rc.12",
     "linq-typescript": "^1.0.251",
     "linqts": "^1.13.0",
-    "moment": "^2.26.0",
+    "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
