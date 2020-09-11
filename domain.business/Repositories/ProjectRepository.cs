@@ -15,7 +15,7 @@ namespace domain.business.Repositories
         string getAllQuery =
 @"SELECT [Projects].*, [WorkingTimes].*
 FROM [Projects]
-LEFT JOIN [WorkingTimes] ON [Projects].Id = [WorkingTimes].ProjectId
+LEFT JOIN [WorkingTimes] ON [Projects].Id = [WorkingTimes].ProjectId AND [WorkingTimes].IsDeleted = 0
 WHERE [Projects].IsDeleted = 0";
 
         string createQuery =
