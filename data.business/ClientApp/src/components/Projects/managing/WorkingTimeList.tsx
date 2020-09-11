@@ -36,7 +36,7 @@ const WorkingTimeList: React.FC<IWorkingTimeListState> = (
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Comment</TableCell>
+              <TableCell align="left">Timing mark</TableCell>
               <TableCell align="left">Started at</TableCell>
               <TableCell align="left">Ended at</TableCell>
               <TableCell align="justify">Actions</TableCell>

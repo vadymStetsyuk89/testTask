@@ -68,7 +68,7 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
               const value = args?.target?.value ? args.target.value : '';
               setName(value);
             }}
-            label="Timing name"
+            label="Timing mark"
           />
         </Grid>
         <Grid item xs={3}>

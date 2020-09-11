@@ -11,6 +11,7 @@ import {
   makeStyles,
   TableBody,
   Container,
+  ButtonGroup,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { assignPendingActions } from '../../helpers/action.helper';
@@ -20,7 +21,10 @@ import { Prdoject, WorkingTime } from '../../model/project/prdoject';
 import { dialogActions } from '../../reducers/dialogSlice';
 import ProjectEditForm from './managing/ProjectEditForm';
 import { List } from 'linq-typescript';
-import { calculateTotalTime } from '../../helpers/timeParsing.helper';
+import {
+  buildTotalTimeString,
+  buildProfitString,
+} from '../../helpers/timeParsing.helper';
 
 export interface IProjectRowState {
   project: Prdoject;
@@ -62,15 +66,21 @@ const ProjectRow: React.FC<IProjectRowState> = (props: IProjectRowState) => {
       </TableCell>
       <TableCell align="left">{props.project.customerName}</TableCell>
       <TableCell align="left">{props.project.rate}</TableCell>
-      <TableCell align="left">{calculateTotalTime(props.project)}</TableCell>
-      <TableCell align="left">{'TODO: Total profit'}</TableCell>
+      <TableCell align="left">{buildTotalTimeString(props.project)}</TableCell>
+      <TableCell align="left">{buildProfitString(props.project)}</TableCell>
       <TableCell align="left">
-        <Button onClick={onEdit} variant="contained" color="primary">
-          Edit
-        </Button>
-        <Button onClick={onDelete} variant="contained" color="secondary">
-          Delete
-        </Button>
+        <ButtonGroup
+          disableElevation
+          color="primary"
+          aria-label="large outlined primary button group"
+        >
+          <Button onClick={onEdit} color="primary">
+            Edit
+          </Button>
+          <Button onClick={onDelete} color="secondary">
+            Delete
+          </Button>
+        </ButtonGroup>
       </TableCell>
     </TableRow>
   );

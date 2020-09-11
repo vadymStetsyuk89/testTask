@@ -28,10 +28,6 @@ const WorkingTimeItem: React.FC<IWorkingTimeItemState> = (
   props: IWorkingTimeItemState
 ) => {
   const onRemove = () => {
-    // let updatedValues: any[] = new List<any>(props.formik.values.workingTiming)
-    //   .where((item) => item !== props.item)
-    //   .toArray();
-
     let updatedValues: any[] = [...props.formik.values.workingTiming];
 
     if (props.item.id > 0) {
