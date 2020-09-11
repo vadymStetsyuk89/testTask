@@ -9,6 +9,6 @@ namespace domain.business.Entities.Projects
 
         public decimal Rate { get; set; }
 
-        public ICollection<WorkingTime> WorkingTimes { get; set; }
+        public ICollection<WorkingTime> WorkingTimes { get; set; } = new List<WorkingTime>();
     }
 }
