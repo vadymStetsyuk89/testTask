@@ -41,11 +41,10 @@ const ProjectsTable: React.FC<any> = () => {
         [],
         [],
         (args: any) => {
+          /// TODO
           dispatch(projectActions.setProjectList(args));
         },
-        (args: any) => {
-          dispatch(projectActions.setProjectList(args));
-        }
+        (args: any) => {}
       )
     );
 

@@ -1,7 +1,7 @@
 import { Container } from '@material-ui/core';
 import { Form, Formik } from 'formik';
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { assignPendingActions } from '../../../helpers/action.helper';
 import { IProjectFormValues, Prdoject } from '../../../model/project/prdoject';
@@ -9,6 +9,7 @@ import { dialogActions } from '../../../reducers/dialogSlice';
 import { projectActions } from '../../../reducers/projectSlice';
 import FormControls from './formParts/FormControls';
 import FormLayout from './formParts/FormLayout';
+import { IApplicationState } from '../../../reducers/rootReducer';
 
 export interface IProjectCreateFormState {}
 
@@ -42,6 +43,12 @@ const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
 ) => {
   const dispatch = useDispatch();
 
+  const prdojects: Prdoject[] = useSelector<IApplicationState, Prdoject[]>(
+    (state) => {
+      return state.project.projects;
+    }
+  );
+
   const onDismis = () => {
     dispatch(dialogActions.closeDialog());
     dispatch(projectActions.changeTargetProject(null));
@@ -56,11 +63,13 @@ const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
         [],
         [],
         (args: any) => {
-          dispatch(projectActions.setProjectList(args));
+          /// TODO
+          prdojects.push(args);
+          dispatch(projectActions.setProjectList([...prdojects]));
+
           onDismis();
         },
         (args: any) => {
-          dispatch(projectActions.setProjectList(args));
           onDismis();
         }
       )

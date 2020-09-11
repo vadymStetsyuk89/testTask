@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, TableCell, TableRow } from '@material-ui/core';
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { assignPendingActions } from '../../helpers/action.helper';
 import {
   buildProfitString,
@@ -10,6 +10,8 @@ import { Prdoject } from '../../model/project/prdoject';
 import { dialogActions } from '../../reducers/dialogSlice';
 import { projectActions } from '../../reducers/projectSlice';
 import ProjectEditForm from './managing/ProjectEditForm';
+import { IApplicationState } from '../../reducers/rootReducer';
+import { List } from 'linq-typescript';
 
 export interface IProjectRowState {
   project: Prdoject;
@@ -18,6 +20,12 @@ export interface IProjectRowState {
 const ProjectRow: React.FC<IProjectRowState> = (props: IProjectRowState) => {
   const dispatch = useDispatch();
 
+  const prdojects: Prdoject[] = useSelector<IApplicationState, Prdoject[]>(
+    (state) => {
+      return state.project.projects;
+    }
+  );
+
   const onDelete = () => {
     dispatch(
       assignPendingActions(
@@ -25,11 +33,14 @@ const ProjectRow: React.FC<IProjectRowState> = (props: IProjectRowState) => {
         [],
         [],
         (args: any) => {
-          dispatch(projectActions.setProjectList(args));
+          /// TODO
+          let updatedProjects = new List<Prdoject>(prdojects)
+            .where((project) => project.id !== props.project.id)
+            .toArray();
+
+          dispatch(projectActions.setProjectList(updatedProjects));
         },
-        (args: any) => {
-          dispatch(projectActions.setProjectList(args));
-        }
+        (args: any) => {}
       )
     );
   };

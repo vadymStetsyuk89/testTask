@@ -10,6 +10,7 @@ import { projectActions } from '../../../reducers/projectSlice';
 import { IApplicationState } from '../../../reducers/rootReducer';
 import FormControls from './formParts/FormControls';
 import FormLayout from './formParts/FormLayout';
+import { List } from 'linq-typescript';
 
 export interface IProjectEditFormState {}
 
@@ -45,6 +46,12 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
     (state) => state.project.targetProject
   );
 
+  const prdojects: Prdoject[] = useSelector<IApplicationState, Prdoject[]>(
+    (state) => {
+      return state.project.projects;
+    }
+  );
+
   const onDismis = () => {
     dispatch(dialogActions.closeDialog());
     dispatch(projectActions.changeTargetProject(null));
@@ -59,11 +66,21 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
         [],
         [],
         (args: any) => {
-          dispatch(projectActions.setProjectList(args));
+          /// TODO
+          let updatedProjects = new List<Prdoject>(prdojects)
+            .select((project) => {
+              let selectResult = project;
+
+              if (project.id === args.id) selectResult = args;
+
+              return selectResult;
+            })
+            .toArray();
+
+          dispatch(projectActions.setProjectList(updatedProjects));
           onDismis();
         },
         (args: any) => {
-          dispatch(projectActions.setProjectList(args));
           onDismis();
         }
       )
