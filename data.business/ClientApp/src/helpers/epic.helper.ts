@@ -69,6 +69,7 @@ export const postWebRequest = (
   if (token) {
     header = Object.assign(header, {
       Authorization: `Bearer ${TokenHelper.getAccessToken()}`,
+      'Content-Type': 'application/json',
     });
   }
 
@@ -137,6 +138,7 @@ export const deleteWebRequest = (
 ) => {
   let header = {
     Authorization: `Bearer ${TokenHelper.getAccessToken()}`,
+    'Content-Type': 'application/json',
   };
 
   let queryString = `${API.SERVER_URL}/${urlPath}${buildQueryParamsString(

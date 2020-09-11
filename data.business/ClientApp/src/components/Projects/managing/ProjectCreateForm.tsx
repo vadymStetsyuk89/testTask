@@ -18,7 +18,7 @@ const buildPayload = (values: IProjectFormValues) => {
     name: values.name,
     customerName: values.customerName,
     rate: values.rate,
-    timings: values.workingTiming,
+    workingTimes: values.workingTiming,
     description: '',
     id: 0,
     isDeleted: false,
