@@ -22,7 +22,8 @@ SELECT SCOPE_IDENTITY()";
 ,[Description]=@Description
 ,[StartedAt]=@StartedAt
 ,[EndedAt]=@EndedAt
-,[ProjectId]=@ProjectId";
+,[ProjectId]=@ProjectId
+WHERE [WorkingTimes].Id = @Id";
 
         #endregion
 

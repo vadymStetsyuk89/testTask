@@ -31,7 +31,8 @@ SELECT SCOPE_IDENTITY()";
 [Name]=@Name,
 [Description]=@Description,
 [CustomerName]=@CustomerName,
-[Rate]=@Rate";
+[Rate]=@Rate 
+WHERE [Projects].Id = @Id";
 
         #endregion
 
