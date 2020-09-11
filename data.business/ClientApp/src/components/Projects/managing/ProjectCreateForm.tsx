@@ -64,14 +64,7 @@ const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
         [],
         [],
         (args: any) => {
-          // /// TODO
-          // debugger;
-          // let projectsList = new List<Prdoject>(prdojects);
-          // projectsList.push(args.body);
-
-          // // prdojects.push(args.body);
-          // dispatch(projectActions.setProjectList(projectsList.toArray()));
-
+          /// TODO
           dispatch(
             assignPendingActions(
               projectActions.apiGetAllProjects(),

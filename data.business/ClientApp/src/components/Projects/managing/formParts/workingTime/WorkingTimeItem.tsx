@@ -18,8 +18,17 @@ const WorkingTimeItem: React.FC<IWorkingTimeItemState> = (
     let updatedValues: any[] = [...props.formik.values.workingTiming];
 
     if (props.item.id > 0) {
-      props.item.isDeleted = true;
-      updatedValues = [...props.formik.values.workingTiming];
+      updatedValues = new List<WorkingTime>(updatedValues)
+        .select((timing) => {
+          let result = timing;
+
+          if (timing.id === props.item.id) {
+            result = { ...props.item, isDeleted: true };
+          }
+
+          return result;
+        })
+        .toArray();
     } else {
       let valuesList = new List<any>(props.formik.values.workingTiming);
       valuesList.removeAt(props.itemIndex);
