@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from '@material-ui/core';
 import * as React from 'react';
-import { WorkingTime } from '../../../model/project/prdoject';
+import { WorkingTime } from '../../../../model/project/prdoject';
 
 export interface IWorkingTimeEntryState {
   formik: any;
@@ -61,7 +61,7 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
               const value = args?.target?.value ? args.target.value : '';
               setName(value);
             }}
-            label="Timing mark"
+            label="Timing alias"
           />
         </Grid>
         <Grid item xs={3}>

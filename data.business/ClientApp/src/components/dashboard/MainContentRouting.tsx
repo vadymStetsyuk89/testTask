@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
-import { APP_SEGMENT, PROJECTS_SEGMENT } from '../AppRouting';
 import Projects from '../Projects/Projects';
 import './mainContent.scss';
+import {
+  APP_SEGMENT,
+  PROJECTS_SEGMENT,
+} from '../../constants/appRoutings.constants';
 
-const MainContent: React.FC<any> = () => {
+const MainContentRouting: React.FC<any> = () => {
   return (
     <div className="mainContent">
       <Switch>
@@ -23,4 +26,4 @@ const MainContent: React.FC<any> = () => {
   );
 };
 
-export default MainContent;
+export default MainContentRouting;

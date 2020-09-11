@@ -2,10 +2,7 @@ import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import { Dashboard } from './dashboard/DashBoard';
 import PageNotFound from './PageNotFound';
-
-export const APP_SEGMENT: string = 'app';
-export const PROJECTS_SEGMENT: string = 'projects';
-export const NOT_FOUND: string = 'not-found';
+import { APP_SEGMENT, NOT_FOUND } from '../constants/appRoutings.constants';
 
 export const AppRouting: React.FC<any> = (props) => {
   return (

@@ -1,9 +1,9 @@
 import { Button, TableCell, TableRow } from '@material-ui/core';
 import { List } from 'linq-typescript';
 import * as React from 'react';
-import { dateToFormatedString } from '../../../helpers/date.helper';
-import { buildSingleWorkingTimeProfitStrring } from '../../../helpers/timeParsing.helper';
-import { WorkingTime } from '../../../model/project/prdoject';
+import { dateToFormatedString } from '../../../../../helpers/date.helper';
+import { buildSingleWorkingTimeProfitStrring } from '../../../../../helpers/timeParsing.helper';
+import { WorkingTime } from '../../../../../model/project/prdoject';
 
 export interface IWorkingTimeItemState {
   formik: any;

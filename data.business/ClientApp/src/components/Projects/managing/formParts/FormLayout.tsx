@@ -1,8 +1,8 @@
 import { Box, Grid, Paper } from '@material-ui/core';
 import * as React from 'react';
-import Entry from './Entry';
-import WorkingTimeEntry from './WorkingTimeEntry';
-import WorkingTimeList from './WorkingTimeList';
+import Entry from '../entries/Entry';
+import WorkingTimeEntry from '../entries/WorkingTimeEntry';
+import WorkingTimeList from './workingTime/WorkingTimeList';
 
 export interface IFormLayoutState {
   formik: any;

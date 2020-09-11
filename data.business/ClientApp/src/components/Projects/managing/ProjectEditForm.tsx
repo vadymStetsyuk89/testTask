@@ -8,8 +8,8 @@ import { IProjectFormValues, Prdoject } from '../../../model/project/prdoject';
 import { dialogActions } from '../../../reducers/dialogSlice';
 import { projectActions } from '../../../reducers/projectSlice';
 import { IApplicationState } from '../../../reducers/rootReducer';
-import FormControls from './FormControls';
-import FormLayout from './FormLayout';
+import FormControls from './formParts/FormControls';
+import FormLayout from './formParts/FormLayout';
 
 export interface IProjectEditFormState {}
 
