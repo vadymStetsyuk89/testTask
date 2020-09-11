@@ -1,22 +1,9 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { Prdoject, WorkingTime } from '../../../model/project/prdoject';
-import { IApplicationState } from '../../../reducers/rootReducer';
-import {
-  TextField,
-  Grid,
-  Button,
-  TableRow,
-  TableCell,
-} from '@material-ui/core';
-import Entry from './Entry';
+import { Button, TableCell, TableRow } from '@material-ui/core';
 import { List } from 'linq-typescript';
-import {
-  dateToString,
-  dateToFormatedString,
-} from '../../../helpers/date.helper';
+import * as React from 'react';
+import { dateToFormatedString } from '../../../helpers/date.helper';
+import { buildSingleWorkingTimeProfitStrring } from '../../../helpers/timeParsing.helper';
+import { WorkingTime } from '../../../model/project/prdoject';
 
 export interface IWorkingTimeItemState {
   formik: any;
@@ -43,7 +30,6 @@ const WorkingTimeItem: React.FC<IWorkingTimeItemState> = (
     props.formik.setFieldValue('workingTiming', updatedValues);
     props.formik.setFieldTouched('workingTiming');
   };
-
   return (
     <>
       {props.item.isDeleted ? null : (
@@ -56,6 +42,12 @@ const WorkingTimeItem: React.FC<IWorkingTimeItemState> = (
           </TableCell>
           <TableCell align="left">
             {dateToFormatedString(props.item.endedAt)}
+          </TableCell>
+          <TableCell align="left">
+            {buildSingleWorkingTimeProfitStrring(
+              props.item,
+              props.formik.values.rate
+            )}
           </TableCell>
           <TableCell align="left">
             <Button

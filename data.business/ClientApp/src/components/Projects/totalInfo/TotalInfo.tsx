@@ -1,27 +1,13 @@
+import { Button, Container, Grid, Typography } from '@material-ui/core';
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  TableContainer,
-  Table,
-  Paper,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  makeStyles,
-  Typography,
-  Container,
-  Box,
-  Grid,
-  Button,
-} from '@material-ui/core';
-import { Prdoject } from '../../../model/project/prdoject';
-import { useSelector, useDispatch } from 'react-redux';
-import { IApplicationState } from '../../../reducers/rootReducer';
-import {
-  buildBulkProjectTotalTimeString,
   buildBulkProfitString,
+  buildBulkProjectTotalTimeString,
 } from '../../../helpers/timeParsing.helper';
+import { Prdoject } from '../../../model/project/prdoject';
 import { dialogActions } from '../../../reducers/dialogSlice';
+import { IApplicationState } from '../../../reducers/rootReducer';
 
 export interface ITotalInfoState {}
 

@@ -1,6 +1,5 @@
 import { Prdoject, WorkingTime } from '../model/project/prdoject';
 import { List } from 'linq-typescript';
-import { Select } from '@material-ui/core';
 
 export const buildProjectTotalTimeString = (project: Prdoject) => {
   let result = 'No registered timing';
@@ -61,6 +60,18 @@ export const buildBulkProfitString = (projects: Prdoject[]) => {
   return result;
 };
 
+export const buildSingleWorkingTimeProfitStrring = (
+  workingTime: WorkingTime,
+  rate: number
+) => {
+  let result = '0.00$';
+
+  let hours = parseTicsToHours(calculateTimeDifference(workingTime));
+  result = `${Math.fround(hours * rate).toFixed(2)}$`;
+
+  return result;
+};
+
 const calculateProfit = (project: Prdoject) => {
   let totalProfit: number = 0;
 
@@ -84,12 +95,21 @@ const extractTotalWorkingTimeTics = (project: Prdoject) => {
   if (project?.timings && project.timings.length > 0) {
     result = new List<WorkingTime>(project.timings)
       .select((timing) => {
-        let difference: number =
-          timing.endedAt.getTime() - timing.startedAt.getTime();
+        let difference: number = calculateTimeDifference(timing);
 
         return difference;
       })
       .sum((difference) => difference);
+  }
+
+  return result;
+};
+
+const calculateTimeDifference = (workingTime: WorkingTime) => {
+  let result = 0;
+
+  if (workingTime) {
+    result = workingTime.endedAt.getTime() - workingTime.startedAt.getTime();
   }
 
   return result;

@@ -1,6 +1,6 @@
+import { makeStyles } from '@material-ui/core';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core';
 import Footer from './Footer';
 import Header from './Header';
 import MainContent from './MainContent';

@@ -1,30 +1,15 @@
+import { Button, ButtonGroup, TableCell, TableRow } from '@material-ui/core';
 import * as React from 'react';
-import './projectsTable.scss';
-import {
-  Button,
-  TableContainer,
-  Paper,
-  TableHead,
-  TableRow,
-  TableCell,
-  Table,
-  makeStyles,
-  TableBody,
-  Container,
-  ButtonGroup,
-} from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { assignPendingActions } from '../../helpers/action.helper';
-import { projectActions } from '../../reducers/projectSlice';
-import { IApplicationState } from '../../reducers/rootReducer';
-import { Prdoject, WorkingTime } from '../../model/project/prdoject';
-import { dialogActions } from '../../reducers/dialogSlice';
-import ProjectEditForm from './managing/ProjectEditForm';
-import { List } from 'linq-typescript';
 import {
-  buildProjectTotalTimeString,
   buildProfitString,
+  buildProjectTotalTimeString,
 } from '../../helpers/timeParsing.helper';
+import { Prdoject } from '../../model/project/prdoject';
+import { dialogActions } from '../../reducers/dialogSlice';
+import { projectActions } from '../../reducers/projectSlice';
+import ProjectEditForm from './managing/ProjectEditForm';
 
 export interface IProjectRowState {
   project: Prdoject;
@@ -66,7 +51,7 @@ const ProjectRow: React.FC<IProjectRowState> = (props: IProjectRowState) => {
         {props.project.name}
       </TableCell>
       <TableCell align="left">{props.project.customerName}</TableCell>
-      <TableCell align="left">{props.project.rate}</TableCell>
+      <TableCell align="left">{`${props.project.rate}$`}</TableCell>
       <TableCell align="left">
         {buildProjectTotalTimeString(props.project)}
       </TableCell>

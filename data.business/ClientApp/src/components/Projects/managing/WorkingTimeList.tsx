@@ -1,19 +1,17 @@
+import {
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@material-ui/core';
 import * as React from 'react';
 import WorkingTimeItem from './WorkingTimeItem';
 import './workingTimeList.scss';
-import {
-  TableContainer,
-  Table,
-  Paper,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  makeStyles,
-  Typography,
-  Container,
-  Box,
-} from '@material-ui/core';
 
 export interface IWorkingTimeListState {
   formik: any;
@@ -39,6 +37,7 @@ const WorkingTimeList: React.FC<IWorkingTimeListState> = (
               <TableCell align="left">Timing mark</TableCell>
               <TableCell align="left">Started at</TableCell>
               <TableCell align="left">Ended at</TableCell>
+              <TableCell align="left">Profit</TableCell>
               <TableCell align="justify">Actions</TableCell>
             </TableRow>
           </TableHead>

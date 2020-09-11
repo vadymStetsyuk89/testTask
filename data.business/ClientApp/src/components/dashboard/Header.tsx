@@ -1,23 +1,19 @@
-import * as React from 'react';
-import './header.scss';
 import {
   AppBar,
-  Toolbar,
   IconButton,
-  Typography,
-  Button,
-  makeStyles,
-  createStyles,
-  Theme,
+  Toolbar,
   Tooltip,
+  Typography,
 } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import InfoIcon from '@material-ui/icons/Info';
+import * as React from 'react';
 import { useDispatch } from 'react-redux';
+import { dialogActions } from '../../reducers/dialogSlice';
 import { projectActions } from '../../reducers/projectSlice';
 import ProjectCreateForm from '../Projects/managing/ProjectCreateForm';
-import { dialogActions } from '../../reducers/dialogSlice';
-import InfoIcon from '@material-ui/icons/Info';
 import TotalInfo from '../Projects/totalInfo/TotalInfo';
+import './header.scss';
 
 const Header = () => {
   const dispatch = useDispatch();

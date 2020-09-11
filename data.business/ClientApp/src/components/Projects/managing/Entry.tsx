@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { Field } from 'formik';
-import './entry.scss';
 import { TextField } from '@material-ui/core';
+import { Field } from 'formik';
+import * as React from 'react';
 
 export interface IEntryProps {
   formik: any;
@@ -22,6 +21,7 @@ export const Entry: React.FC<IEntryProps> = (props: IEntryProps) => {
           <TextField
             variant="outlined"
             fullWidth
+            inputProps={{ step: 0.01 }}
             type={props.isNumber ? 'number' : undefined}
             autoComplete={'off'}
             value={`${props.formik.values[props.fieldName]}`}

@@ -1,9 +1,9 @@
+import { Dialog, DialogTitle } from '@material-ui/core';
 import * as React from 'react';
-import { DialogTitle, Dialog } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import { IApplicationState } from '../../reducers/rootReducer';
-import { IDialogProps } from '../../reducers/dialogSlice';
 import { useLocation } from 'react-router';
+import { IDialogProps } from '../../reducers/dialogSlice';
+import { IApplicationState } from '../../reducers/rootReducer';
 
 interface ISharedDialogProps {}
 

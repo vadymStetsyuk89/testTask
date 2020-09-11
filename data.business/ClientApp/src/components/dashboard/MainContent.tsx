@@ -1,8 +1,8 @@
 import * as React from 'react';
-import './mainContent.scss';
-import { Switch, Route, Redirect } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 import { APP_SEGMENT, PROJECTS_SEGMENT } from '../AppRouting';
 import Projects from '../Projects/Projects';
+import './mainContent.scss';
 
 const MainContent: React.FC<any> = () => {
   return (

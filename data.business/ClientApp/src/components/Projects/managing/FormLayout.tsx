@@ -1,10 +1,5 @@
+import { Box, Grid, Paper } from '@material-ui/core';
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { Prdoject } from '../../../model/project/prdoject';
-import { IApplicationState } from '../../../reducers/rootReducer';
-import { TextField, Grid, Paper, Box } from '@material-ui/core';
 import Entry from './Entry';
 import WorkingTimeEntry from './WorkingTimeEntry';
 import WorkingTimeList from './WorkingTimeList';

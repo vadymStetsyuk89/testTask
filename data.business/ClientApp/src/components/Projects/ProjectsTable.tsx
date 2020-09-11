@@ -1,23 +1,22 @@
-import * as React from 'react';
-import './projectsTable.scss';
 import {
-  Button,
-  TableContainer,
+  makeStyles,
   Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  Table,
-  makeStyles,
-  TableBody,
-  Container,
+  Typography,
 } from '@material-ui/core';
+import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { assignPendingActions } from '../../helpers/action.helper';
+import { Prdoject } from '../../model/project/prdoject';
 import { projectActions } from '../../reducers/projectSlice';
 import { IApplicationState } from '../../reducers/rootReducer';
-import { Prdoject } from '../../model/project/prdoject';
 import ProjectRow from './ProjectRow';
+import './projectsTable.scss';
 
 const useStyles = makeStyles({
   table: {
@@ -29,7 +28,7 @@ const ProjectsTable: React.FC<any> = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const prdoject: Prdoject[] = useSelector<IApplicationState, Prdoject[]>(
+  const prdojects: Prdoject[] = useSelector<IApplicationState, Prdoject[]>(
     (state) => {
       return state.project.projects;
     }
@@ -61,19 +60,25 @@ const ProjectsTable: React.FC<any> = () => {
             <TableRow>
               <TableCell>Project</TableCell>
               <TableCell align="left">Customer</TableCell>
-              <TableCell align="left">Rate</TableCell>
+              <TableCell align="left">Rate (per hour)</TableCell>
               <TableCell align="left">Total time</TableCell>
               <TableCell align="left">Total profit</TableCell>
               <TableCell align="left">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {prdoject.map((project: Prdoject, index: number) => (
+            {prdojects.map((project: Prdoject, index: number) => (
               <ProjectRow key={index} project={project} />
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+
+      {prdojects && prdojects.length === 0 ? (
+        <Typography variant="h6" style={{ marginTop: 24 }} align="center">
+          Add your first project
+        </Typography>
+      ) : null}
     </div>
   );
 };

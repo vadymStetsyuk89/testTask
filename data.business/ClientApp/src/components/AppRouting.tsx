@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, Redirect, Route } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 import { Dashboard } from './dashboard/DashBoard';
 import PageNotFound from './PageNotFound';
 

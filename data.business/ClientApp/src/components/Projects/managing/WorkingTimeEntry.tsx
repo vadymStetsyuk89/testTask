@@ -1,13 +1,6 @@
+import { Button, Grid, TextField } from '@material-ui/core';
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { Prdoject, WorkingTime } from '../../../model/project/prdoject';
-import { IApplicationState } from '../../../reducers/rootReducer';
-import { TextField, Grid, Button, Box, Container } from '@material-ui/core';
-import Entry from './Entry';
-import { dateToFormatedString } from '../../../helpers/date.helper';
-import * as moment from 'moment';
+import { WorkingTime } from '../../../model/project/prdoject';
 
 export interface IWorkingTimeEntryState {
   formik: any;
@@ -58,7 +51,7 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
 
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid item xs={3}>
           <TextField
             value={name}
@@ -115,7 +108,7 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
               onAddClick();
             }}
           >
-            Add time
+            Add
           </Button>
         </Grid>
       </Grid>
