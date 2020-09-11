@@ -103,7 +103,7 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
               .required(() => 'Customer name is required')
               .min(3)
               .max(50),
-            rate: Yup.number().min(0.01),
+            rate: Yup.number().min(0.01).max(999999999),
             workingTiming: Yup.array(),
           })}
           initialValues={initDefaultValues(projectForEdit)}
