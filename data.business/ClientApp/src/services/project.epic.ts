@@ -87,34 +87,6 @@ export const apiUpdateProjectEpic = (action$: AnyAction, state$: any) => {
           return successCommonEpicFlow(successResponse, [], action);
         }),
         catchError((errorResponse: any) => {
-          // let pseudoResult = new List<Prdoject>(state$.value.project.projects)
-          //   .select((project) => {
-          //     let result: Prdoject;
-
-          //     if (project.id === action.payload.id) {
-          //       result = { ...action.payload, timings: action.payload.timings };
-          //     } else result = { ...project };
-
-          //     result.timings = new List<WorkingTime>(result.timings)
-          //       .select((timing) => {
-          //         return { ...timing };
-          //       })
-          //       .where((timing) => !timing.isDeleted)
-          //       .toArray();
-
-          //     return result;
-          //   })
-          //   .where((project) => !project.isDeleted)
-          //   .toArray();
-
-          // pseudoResult.forEach((project, projectIndex) => {
-          //   project.id = projectIndex + 1;
-
-          //   project.timings.forEach((timing, index) => {
-          //     timing.id = index + 1;
-          //   });
-          // });
-
           return errorCommonEpicFlow(
             errorResponse,
             [{ type: 'ERROR_UPDATE_PROJECT' }],
@@ -139,20 +111,6 @@ export const apiAddNewProjectEpic = (action$: AnyAction, state$: any) => {
           return successCommonEpicFlow(successResponse, [], action);
         }),
         catchError((errorResponse: any) => {
-          // let pseudoResult = new List<Prdoject>(
-          //   state$.value.project.projects.map((item) => ({
-          //     ...item,
-          //   }))
-          // );
-          // pseudoResult.push(action.payload);
-          // pseudoResult.forEach((project, projectIndex) => {
-          //   project.id = projectIndex + 1;
-
-          //   project.timings.forEach((timing, index) => {
-          //     timing.id = index + 1;
-          //   });
-          // });
-
           return errorCommonEpicFlow(
             errorResponse,
             [{ type: 'ERROR_CREATE_PROJECT' }],

@@ -20,7 +20,7 @@ const buildPayload = (values: IProjectFormValues, sourceEntity: Prdoject) => {
     name: values.name,
     customerName: values.customerName,
     rate: values.rate,
-    timings: [...values.workingTiming],
+    workingTimes: [...values.workingTiming],
   };
 
   return payload;
@@ -31,7 +31,7 @@ const initDefaultValues = (sourceEntity: Prdoject) => {
     name: sourceEntity.name,
     customerName: sourceEntity.customerName,
     rate: sourceEntity.rate,
-    workingTiming: [...sourceEntity.timings],
+    workingTiming: [...sourceEntity.workingTimes],
   };
 
   return initValues;

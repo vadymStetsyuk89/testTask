@@ -6,12 +6,12 @@ export class Prdoject extends EntityBaseNamed {
 
     this.customerName = '';
     this.rate = 0;
-    this.timings = [];
+    this.workingTimes = [];
   }
 
   customerName: string;
   rate: number;
-  timings: WorkingTime[];
+  workingTimes: WorkingTime[];
 }
 
 export class WorkingTime extends EntityBaseNamed {
