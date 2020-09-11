@@ -46,10 +46,12 @@ namespace service.business.ProjectServices
                     IProjectRepository projRepository = _repositoriesFactory.GetProjectRepository(connection);
 
                     Project proj = projRepository.GetProject(projectId);
-                    
-                    proj.IsDeleted = true;
+                    if (proj != null)
+                    {
+                        proj.IsDeleted = true;
 
-                    projRepository.UpdateProject(proj);
+                        projRepository.UpdateProject(proj);
+                    }
 
                     return proj;
                 }
