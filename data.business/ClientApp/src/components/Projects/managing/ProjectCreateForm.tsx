@@ -10,6 +10,7 @@ import { projectActions } from '../../../reducers/projectSlice';
 import FormControls from './formParts/FormControls';
 import FormLayout from './formParts/FormLayout';
 import { IApplicationState } from '../../../reducers/rootReducer';
+import { List } from 'linq-typescript';
 
 export interface IProjectCreateFormState {}
 
@@ -64,8 +65,12 @@ const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
         [],
         (args: any) => {
           /// TODO
-          prdojects.push(args);
-          dispatch(projectActions.setProjectList([...prdojects]));
+          debugger;
+          let projectsList = new List<Prdoject>(prdojects);
+          projectsList.push(args.body);
+
+          // prdojects.push(args.body);
+          dispatch(projectActions.setProjectList(projectsList.toArray()));
 
           onDismis();
         },
