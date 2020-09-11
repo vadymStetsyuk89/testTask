@@ -5,11 +5,12 @@ import * as Yup from 'yup';
 import { Prdoject, IProjectFormValues } from '../../../model/project/prdoject';
 import { IApplicationState } from '../../../reducers/rootReducer';
 import FormLayout from './FormLayout';
-import { Container, Button } from '@material-ui/core';
+import { Container, Button, Grid } from '@material-ui/core';
 import { dialogActions } from '../../../reducers/dialogSlice';
 import { assignPendingActions } from '../../../helpers/action.helper';
 import { projectActions } from '../../../reducers/projectSlice';
 import { IProjectEditFormState } from './ProjectEditForm';
+import FormControls from './FormControls';
 
 export interface IProjectCreateFormState {}
 
@@ -21,6 +22,7 @@ const buildPayload = (values: IProjectFormValues) => {
     timings: values.workingTiming,
     description: '',
     id: 0,
+    isDeleted: false,
   };
 
   return payload;
@@ -96,16 +98,7 @@ const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
               <Container>
                 <FormLayout formik={formik} />
 
-                <Button onClick={() => onDismis()} variant="contained">
-                  Dismis
-                </Button>
-                <Button
-                  onClick={() => formik.submitForm()}
-                  variant="contained"
-                  color="primary"
-                >
-                  Save
-                </Button>
+                <FormControls formik={formik} onDismis={onDismis} />
               </Container>
             </Form>
           );

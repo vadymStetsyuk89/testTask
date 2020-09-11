@@ -19,7 +19,6 @@ export const calculateTotalTime = (project: Prdoject) => {
     let hours = tottalDifference / 1000 / 60 / 60;
     let days = tottalDifference / 1000 / 60 / 60 / 24;
 
-    debugger;
     if (minutes < 60) {
       result = calculateMinutes(minutes);
     } else {
@@ -56,7 +55,6 @@ const calculateHours = (hours: number) => {
 };
 
 const calculateDays = (days: number) => {
-  debugger;
   let result = '';
   let flooredDays = Math.floor(days);
 

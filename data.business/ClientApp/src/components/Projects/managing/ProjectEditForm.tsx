@@ -9,11 +9,11 @@ import { Container, Button } from '@material-ui/core';
 import { dialogActions } from '../../../reducers/dialogSlice';
 import { assignPendingActions } from '../../../helpers/action.helper';
 import { projectActions } from '../../../reducers/projectSlice';
+import FormControls from './FormControls';
 
 export interface IProjectEditFormState {}
 
 const buildPayload = (values: IProjectFormValues, sourceEntity: Prdoject) => {
-  debugger;
   let payload: Prdoject = {
     ...sourceEntity,
     name: values.name,
@@ -99,16 +99,7 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
               <Form>
                 <FormLayout formik={formik} />
 
-                <Button onClick={() => onDismis()} variant="contained">
-                  Dismis
-                </Button>
-                <Button
-                  onClick={() => formik.submitForm()}
-                  variant="contained"
-                  color="primary"
-                >
-                  Save
-                </Button>
+                <FormControls formik={formik} onDismis={onDismis} />
               </Form>
             );
           }}
