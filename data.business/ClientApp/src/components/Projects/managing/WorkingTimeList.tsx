@@ -10,6 +10,9 @@ import {
   TableCell,
   TableBody,
   makeStyles,
+  Typography,
+  Container,
+  Box,
 } from '@material-ui/core';
 
 export interface IWorkingTimeListState {
@@ -27,6 +30,10 @@ const WorkingTimeList: React.FC<IWorkingTimeListState> = (
 ) => {
   const classes = useStyles();
 
+  let ddd = [];
+
+  ddd.length;
+
   return (
     <div className="workingTimeList">
       <TableContainer component={Paper}>
@@ -40,19 +47,27 @@ const WorkingTimeList: React.FC<IWorkingTimeListState> = (
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.formik.values.workingTiming.map((item, index: number) => {
-              return (
-                <WorkingTimeItem
-                  key={index}
-                  itemIndex={index}
-                  formik={props.formik}
-                  item={item}
-                />
-              );
-            })}
+            {props.formik.values.workingTiming.length > 0
+              ? props.formik.values.workingTiming.map((item, index: number) => {
+                  return (
+                    <WorkingTimeItem
+                      key={index}
+                      itemIndex={index}
+                      formik={props.formik}
+                      item={item}
+                    />
+                  );
+                })
+              : null}
           </TableBody>
         </Table>
       </TableContainer>
+
+      {props.formik.values.workingTiming.length > 0 ? null : (
+        <Typography style={{ marginTop: 24 }} align="center">
+          Add your first working time
+        </Typography>
+      )}
     </div>
   );
 };
