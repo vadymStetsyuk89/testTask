@@ -73,7 +73,7 @@ namespace data.business.Controllers
 
         [HttpDelete]
         [AssignActionRoute(ProjectSegments.DELETE_PROJECT)]
-        public async Task<IActionResult> Delete([FromBody] int projectId)
+        public async Task<IActionResult> Delete([FromQuery] int projectId)
         {
             try
             {
