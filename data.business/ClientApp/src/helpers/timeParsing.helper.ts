@@ -4,7 +4,7 @@ import { List } from 'linq-typescript';
 export const buildProjectTotalTimeString = (project: Prdoject) => {
   let result = 'No registered timing';
 
-  if (project?.timings && project.timings.length > 0) {
+  if (project?.workingTimes && project.workingTimes.length > 0) {
     let tottalDifference: number = extractTotalWorkingTimeTics(project);
 
     result = calculateTimingString(tottalDifference);
@@ -20,7 +20,7 @@ export const buildBulkProjectTotalTimeString = (projects: Prdoject[]) => {
     let tottalDifference = 0;
 
     projects.forEach((project) => {
-      if (project?.timings && project.timings.length > 0) {
+      if (project?.workingTimes && project.workingTimes.length > 0) {
         tottalDifference += extractTotalWorkingTimeTics(project);
       }
     });
@@ -75,7 +75,7 @@ export const buildSingleWorkingTimeProfitStrring = (
 const calculateProfit = (project: Prdoject) => {
   let totalProfit: number = 0;
 
-  if (project?.timings && project.timings.length > 0) {
+  if (project?.workingTimes && project.workingTimes.length > 0) {
     let tottalDifference: number = extractTotalWorkingTimeTics(project);
     let hours = parseTicsToHours(tottalDifference);
 
@@ -92,8 +92,8 @@ const parseTicsToDays = (tics: number) => tics / 1000 / 60 / 60 / 24;
 const extractTotalWorkingTimeTics = (project: Prdoject) => {
   let result = 0;
 
-  if (project?.timings && project.timings.length > 0) {
-    result = new List<WorkingTime>(project.timings)
+  if (project?.workingTimes && project.workingTimes.length > 0) {
+    result = new List<WorkingTime>(project.workingTimes)
       .select((timing) => {
         let difference: number = calculateTimeDifference(timing);
 
