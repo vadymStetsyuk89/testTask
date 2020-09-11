@@ -45,19 +45,23 @@ SELECT SCOPE_IDENTITY()";
         public int CreateProject(Project project) =>
             _connection.QuerySingle<int>(createQuery, project);
 
-        public IEnumerable<Project> GetAllProjects() {
+        public IEnumerable<Project> GetAllProjects()
+        {
             List<Project> results = new List<Project>();
 
             _connection.Query<Project, WorkingTime, Project>(
                 getAllQuery,
                 (project, time) =>
                 {
-                    if (results.Any(x =>x .Id == project.Id))
+                    if (results.Any(x => x.Id == project.Id))
                         project = results.First(x => x.Id == project.Id);
                     else
                         results.Add(project);
 
-                    project.WorkingTimes.Add(time);
+                    if (time != null)
+                    {
+                        project.WorkingTimes.Add(time);
+                    }
 
                     return project;
                 })
