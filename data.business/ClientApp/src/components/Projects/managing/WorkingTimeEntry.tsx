@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Prdoject, WorkingTime } from '../../../model/project/prdoject';
 import { IApplicationState } from '../../../reducers/rootReducer';
-import { TextField, Grid, Button } from '@material-ui/core';
+import { TextField, Grid, Button, Box, Container } from '@material-ui/core';
 import Entry from './Entry';
 import { dateToFormatedString } from '../../../helpers/date.helper';
 import * as moment from 'moment';
@@ -59,20 +59,24 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item>
+        <Grid item xs={3}>
           <TextField
             value={name}
+            fullWidth
+            variant="outlined"
             onChange={(args: any) => {
               const value = args?.target?.value ? args.target.value : '';
               setName(value);
             }}
-            label="Comment"
+            label="Timing name"
           />
         </Grid>
-        <Grid>
+        <Grid item xs={3}>
           <TextField
+            fullWidth
             label="Started at"
             type="datetime-local"
+            variant="outlined"
             onChange={(args: any) => {
               const value = args?.target?.value ? args.target.value : '';
               let date = new Date(value);
@@ -83,10 +87,12 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
             }}
           />
         </Grid>
-        <Grid>
+        <Grid item xs={3}>
           <TextField
+            fullWidth
             label="Ended at"
             type="datetime-local"
+            variant="outlined"
             InputLabelProps={{
               shrink: true,
             }}
@@ -98,8 +104,10 @@ const WorkingTimeEntry: React.FC<IWorkingTimeEntryState> = (
           />
         </Grid>
 
-        <Grid>
+        <Grid item xs={3}>
           <Button
+            style={{ marginTop: 9 }}
+            fullWidth
             disabled={isDisabled}
             variant="contained"
             color="primary"

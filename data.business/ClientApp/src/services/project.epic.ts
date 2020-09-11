@@ -17,7 +17,7 @@ import {
   successCommonEpicFlow,
   errorCommonEpicFlow,
 } from '../helpers/action.helper';
-import { Prdoject } from '../model/project/prdoject';
+import { Prdoject, WorkingTime } from '../model/project/prdoject';
 import Projects from '../components/Projects/Projects';
 import { List } from 'linq-typescript';
 
@@ -96,10 +96,31 @@ export const apiUpdateProjectEpic = (action$: AnyAction, state$: any) => {
         catchError((errorResponse: any) => {
           let pseudoResult = new List<Prdoject>(state$.value.project.projects)
             .select((project) => {
-              if (project.id === action.payload.id) return action.payload;
-              else return project;
+              let result: Prdoject;
+
+              if (project.id === action.payload.id) {
+                result = { ...action.payload, timings: action.payload.timings };
+              } else result = { ...project };
+
+              result.timings = new List<WorkingTime>(result.timings)
+                .select((timing) => {
+                  return { ...timing };
+                })
+                .where((timing) => !timing.isDeleted)
+                .toArray();
+
+              return result;
             })
+            .where((project) => !project.isDeleted)
             .toArray();
+
+          pseudoResult.forEach((project, projectIndex) => {
+            project.id = projectIndex + 1;
+
+            project.timings.forEach((timing, index) => {
+              timing.id = index + 1;
+            });
+          });
 
           return errorCommonEpicFlow(
             pseudoResult,
@@ -131,6 +152,13 @@ export const apiAddNewProjectEpic = (action$: AnyAction, state$: any) => {
             }))
           );
           pseudoResult.push(action.payload);
+          pseudoResult.forEach((project, projectIndex) => {
+            project.id = projectIndex + 1;
+
+            project.timings.forEach((timing, index) => {
+              timing.id = index + 1;
+            });
+          });
 
           return errorCommonEpicFlow(
             pseudoResult.toArray(),

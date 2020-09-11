@@ -21,15 +21,28 @@ import {
 export interface IWorkingTimeItemState {
   formik: any;
   item: WorkingTime;
+  itemIndex: number;
 }
 
 const WorkingTimeItem: React.FC<IWorkingTimeItemState> = (
   props: IWorkingTimeItemState
 ) => {
   const onRemove = () => {
-    let updatedValues: any[] = new List<any>(props.formik.values.workingTiming)
-      .where((item) => item !== props.item)
-      .toArray();
+    // let updatedValues: any[] = new List<any>(props.formik.values.workingTiming)
+    //   .where((item) => item !== props.item)
+    //   .toArray();
+
+    let updatedValues: any[] = [...props.formik.values.workingTiming];
+
+    if (props.item.id > 0) {
+      props.item.isDeleted = true;
+      updatedValues = [...props.formik.values.workingTiming];
+    } else {
+      let valuesList = new List<any>(props.formik.values.workingTiming);
+      valuesList.removeAt(props.itemIndex);
+
+      updatedValues = valuesList.toArray();
+    }
 
     props.formik.setFieldValue('workingTiming', updatedValues);
     props.formik.setFieldTouched('workingTiming');
@@ -37,26 +50,28 @@ const WorkingTimeItem: React.FC<IWorkingTimeItemState> = (
 
   return (
     <>
-      <TableRow>
-        <TableCell component="th" scope="row">
-          {props.item.name}
-        </TableCell>
-        <TableCell align="left">
-          {dateToFormatedString(props.item.startedAt)}
-        </TableCell>
-        <TableCell align="left">
-          {dateToFormatedString(props.item.endedAt)}
-        </TableCell>
-        <TableCell align="left">
-          <Button
-            onClick={() => onRemove()}
-            variant="contained"
-            color="secondary"
-          >
-            Remove
-          </Button>
-        </TableCell>
-      </TableRow>
+      {props.item.isDeleted ? null : (
+        <TableRow>
+          <TableCell component="th" scope="row">
+            {props.item.name}
+          </TableCell>
+          <TableCell align="left">
+            {dateToFormatedString(props.item.startedAt)}
+          </TableCell>
+          <TableCell align="left">
+            {dateToFormatedString(props.item.endedAt)}
+          </TableCell>
+          <TableCell align="left">
+            <Button
+              onClick={() => onRemove()}
+              variant="contained"
+              color="secondary"
+            >
+              Remove
+            </Button>
+          </TableCell>
+        </TableRow>
+      )}
     </>
   );
 };

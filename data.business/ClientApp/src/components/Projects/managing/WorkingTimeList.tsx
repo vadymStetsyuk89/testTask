@@ -44,6 +44,7 @@ const WorkingTimeList: React.FC<IWorkingTimeListState> = (
               return (
                 <WorkingTimeItem
                   key={index}
+                  itemIndex={index}
                   formik={props.formik}
                   item={item}
                 />

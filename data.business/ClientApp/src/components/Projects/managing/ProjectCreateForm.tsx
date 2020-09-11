@@ -69,31 +69,31 @@ const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
 
   return (
     <div>
-      <Container>
-        <Formik
-          validationSchema={Yup.object().shape({
-            name: Yup.string()
-              .required(() => 'Name is required')
-              .min(3)
-              .max(50),
-            customerName: Yup.string()
-              .required(() => 'Customer name is required')
-              .min(3)
-              .max(50),
-            rate: Yup.number().min(0.01),
-            workingTiming: Yup.array(),
-          })}
-          initialValues={initDefaultValues()}
-          onSubmit={(values: any) => {
-            onCreate(values);
-          }}
-          innerRef={(formik: any) => {}}
-          validateOnBlur={false}
-          enableReinitialize={true}
-        >
-          {(formik) => {
-            return (
-              <Form>
+      <Formik
+        validationSchema={Yup.object().shape({
+          name: Yup.string()
+            .required(() => 'Name is required')
+            .min(3)
+            .max(50),
+          customerName: Yup.string()
+            .required(() => 'Customer name is required')
+            .min(3)
+            .max(50),
+          rate: Yup.number().min(0.01),
+          workingTiming: Yup.array(),
+        })}
+        initialValues={initDefaultValues()}
+        onSubmit={(values: any) => {
+          onCreate(values);
+        }}
+        innerRef={(formik: any) => {}}
+        validateOnBlur={false}
+        enableReinitialize={true}
+      >
+        {(formik) => {
+          return (
+            <Form>
+              <Container>
                 <FormLayout formik={formik} />
 
                 <Button onClick={() => onDismis()} variant="contained">
@@ -106,11 +106,11 @@ const ProjectCreateForm: React.FC<IProjectCreateFormState> = (
                 >
                   Save
                 </Button>
-              </Form>
-            );
-          }}
-        </Formik>
-      </Container>
+              </Container>
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 };

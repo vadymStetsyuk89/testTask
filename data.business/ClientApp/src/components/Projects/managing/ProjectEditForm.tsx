@@ -13,12 +13,13 @@ import { projectActions } from '../../../reducers/projectSlice';
 export interface IProjectEditFormState {}
 
 const buildPayload = (values: IProjectFormValues, sourceEntity: Prdoject) => {
+  debugger;
   let payload: Prdoject = {
     ...sourceEntity,
     name: values.name,
     customerName: values.customerName,
     rate: values.rate,
-    timings: [],
+    timings: [...values.workingTiming],
   };
 
   return payload;
@@ -29,7 +30,7 @@ const initDefaultValues = (sourceEntity: Prdoject) => {
     name: sourceEntity.name,
     customerName: sourceEntity.customerName,
     rate: sourceEntity.rate,
-    workingTiming: [],
+    workingTiming: [...sourceEntity.timings],
   };
 
   return initValues;
@@ -83,6 +84,7 @@ const ProjectEditForm: React.FC<IProjectEditFormState> = (
               .min(3)
               .max(50),
             rate: Yup.number().min(0.01),
+            workingTiming: Yup.array(),
           })}
           initialValues={initDefaultValues(projectForEdit)}
           onSubmit={(values: any) => {

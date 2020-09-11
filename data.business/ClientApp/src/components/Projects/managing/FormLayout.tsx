@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Prdoject } from '../../../model/project/prdoject';
 import { IApplicationState } from '../../../reducers/rootReducer';
-import { TextField, Grid } from '@material-ui/core';
+import { TextField, Grid, Paper, Box } from '@material-ui/core';
 import Entry from './Entry';
 import WorkingTimeEntry from './WorkingTimeEntry';
 import WorkingTimeList from './WorkingTimeList';
@@ -15,42 +15,45 @@ export interface IFormLayoutState {
 
 const FormLayout: React.FC<IFormLayoutState> = (props: IFormLayoutState) => {
   return (
-    <Grid container>
-      <Grid container item spacing={3} xs={4}>
-        <Grid item xs={12}>
-          <Entry
-            formik={props.formik}
-            fieldName={'name'}
-            label={'Project Name'}
-            isRequired={true}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Entry
-            formik={props.formik}
-            fieldName={'customerName'}
-            label={'Customer Name'}
-            isRequired={true}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Entry
-            formik={props.formik}
-            fieldName={'rate'}
-            label={'Rate'}
-            isNumber={true}
-            isRequired={true}
-          />
-        </Grid>
+    <Grid container spacing={3}>
+      <Grid item xs={3}>
+        <Paper style={{ padding: 12 }}>
+          <Box marginBottom={2}>
+            <Entry
+              formik={props.formik}
+              fieldName={'name'}
+              label={'Project Name'}
+              isRequired={true}
+            />
+          </Box>
+          <Box marginBottom={2}>
+            <Entry
+              formik={props.formik}
+              fieldName={'customerName'}
+              label={'Customer Name'}
+              isRequired={true}
+            />
+          </Box>
+          <Box>
+            <Entry
+              formik={props.formik}
+              fieldName={'rate'}
+              label={'Rate'}
+              isNumber={true}
+              isRequired={true}
+            />
+          </Box>
+        </Paper>
       </Grid>
 
-      <Grid container item xs={8} spacing={3}>
-        <Grid item>
+      <Grid item xs={9}>
+        <Paper style={{ padding: 12, marginBottom: 24 }}>
           <WorkingTimeEntry formik={props.formik} />
-        </Grid>
-        <Grid item>
+        </Paper>
+
+        <Paper style={{ padding: 12 }}>
           <WorkingTimeList formik={props.formik} />
-        </Grid>
+        </Paper>
       </Grid>
     </Grid>
   );
