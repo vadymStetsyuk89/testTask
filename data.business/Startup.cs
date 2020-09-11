@@ -76,22 +76,19 @@ namespace data.business
 
             app.UseRouting();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller}/{action=Index}/{id?}");
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+            });
 
             app.UseSpa(spa => {
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment()) {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-                else
+                if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "build");
+                    spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
         }
